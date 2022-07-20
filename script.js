@@ -1,29 +1,18 @@
 'use strict';
+// call and apply
 
-console.log(`\n*** Functions ***`);
-console.log(`\n*** Higher Order Functions ***`);
-
-const oneWord = function (str) {
-  return str.replace(/ /g, '').toLowerCase();
+const lufthansa = {
+  airline: 'Lufthansa',
+  iataCode: 'LH',
+  bookings: [],
+  book(flightNum, name) {
+    console.log(
+      `${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`
+    );
+    this.bookings.push({ flight: `${this.iataCode}${flightNum}, name` });
+  },
 };
 
-const upperFirstWord = function (str) {
-  const [first, ...others] = str.split(' ');
-  return [first.toUpperCase(), ...others].join(' ');
-};
+lufthansa.book(458, 'Simon Belmont');
 
-//HOF
-const transformer = function (str, fn) {
-  console.log(`Original String: ${str}`);
-  console.log(`Transormed String: ${fn(str)};`);
-  console.log(`Transformed by: ${fn.name}`);
-};
-
-console.log(
-  `\n* transformer is the higher order function that receives the function 'oneWord' as an argument`
-);
-transformer('JS is the best!', oneWord);
-console.log(
-  `\n* since it is meant as an abstraction, transformer can also use a different function as an argument`
-);
-transformer('javascript is the best!', upperFirstWord);
+//bind method
